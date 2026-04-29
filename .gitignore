@@ -1,0 +1,22 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos temporales
+*.tmp
+*.log
+
+# Datos sensibles (no subir CSVs con datos reales)
+*.csv
+!cursor validator/sample_*.csv
+
+# Node (por si se añade build en el futuro)
+node_modules/
+dist/
