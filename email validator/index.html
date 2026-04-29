@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Validador de correos electrónicos de socios — Asociación Cultural Ateneo Siglo XXI">
+    <title>Ateneo Siglo XXI — Validador de Correos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Animated background pattern -->
+    <div class="bg-pattern" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-mosaic" aria-hidden="true"></div>
+        <div class="header-inner">
+            <div class="logo-ring">
+                <img src="assets/ateneo_logo.png" alt="Logo Ateneo Siglo XXI" class="logo">
+            </div>
+            <h1 class="title">Ateneo Siglo <span class="title-accent">XXI</span></h1>
+            <p class="subtitle">Asociación Cultural Jerezana</p>
+            <div class="header-rule">
+                <span class="rule-wing"></span>
+                <span class="rule-diamond">◆</span>
+                <span class="rule-wing"></span>
+            </div>
+            <p class="tagline">Validador de Correos Electrónicos</p>
+        </div>
+        <svg class="header-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0,40 C360,100 720,0 1080,50 C1260,75 1380,30 1440,40 L1440,80 L0,80 Z"/>
+        </svg>
+    </header>
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- Upload Section -->
+        <section class="card upload-card" id="upload-section">
+            <div class="card-border-top"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="32" height="32" rx="8" stroke="currentColor" stroke-width="2"/><path d="M20 26V14m0 0l-5 5m5-5l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="card-title">Cargar Archivo CSV</h2>
+                        <p class="card-desc">Sube el archivo con los correos de los socios</p>
+                    </div>
+                </div>
+
+                <div class="upload-zone" id="upload-zone">
+                    <div class="upload-zone-content">
+                        <div class="upload-anim">
+                            <div class="upload-circle"></div>
+                            <svg class="upload-arrow" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M24 34V14M24 14L16 22M24 14L32 22" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p class="upload-text">Arrastra tu archivo CSV aquí</p>
+                        <p class="upload-sub">o haz clic para seleccionar</p>
+                        <div class="upload-chips">
+                            <span class="chip">.csv</span>
+                            <span class="chip chip-alt">Auto-detección de emails</span>
+                        </div>
+                    </div>
+                    <input type="file" id="csv-input" accept=".csv" class="file-input-hidden">
+                </div>
+
+                <div class="file-info hidden" id="file-info">
+                    <div class="file-info-badge">📄</div>
+                    <div class="file-info-text">
+                        <span class="file-name" id="file-name"></span>
+                        <span class="file-size" id="file-size"></span>
+                    </div>
+                    <button class="btn-x" id="btn-remove-file">✕</button>
+                </div>
+
+                <button class="btn-primary" id="btn-validate" disabled>
+                    <span class="btn-glow"></span>
+                    <span class="btn-content">⚡ Validar Correos</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Loading -->
+        <div class="loading-overlay hidden" id="loading">
+            <div class="loading-box">
+                <div class="loader">
+                    <div class="loader-ring"></div>
+                    <div class="loader-ring r2"></div>
+                    <div class="loader-dot">◆</div>
+                </div>
+                <p class="loading-text">Validando correos electrónicos...</p>
+                <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <section class="results-section hidden" id="results-section">
+
+            <div class="stats-row">
+                <div class="stat-card st-total">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-num" id="total-count">0</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat-card st-valid">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-num" id="valid-count">0</div>
+                    <div class="stat-label">Válidos</div>
+                </div>
+                <div class="stat-card st-invalid">
+                    <div class="stat-icon">❌</div>
+                    <div class="stat-num" id="invalid-count">0</div>
+                    <div class="stat-label">Inválidos</div>
+                </div>
+                <div class="stat-card st-dup">
+                    <div class="stat-icon">🔁</div>
+                    <div class="stat-num" id="duplicate-count">0</div>
+                    <div class="stat-label">Duplicados</div>
+                </div>
+            </div>
+
+            <div class="tabs" id="filter-tabs">
+                <button class="tab active" data-filter="all" id="tab-all">Todos <span class="tab-badge" id="tab-count-all">0</span></button>
+                <button class="tab" data-filter="valid" id="tab-valid">Válidos <span class="tab-badge" id="tab-count-valid">0</span></button>
+                <button class="tab" data-filter="invalid" id="tab-invalid">Inválidos <span class="tab-badge" id="tab-count-invalid">0</span></button>
+                <button class="tab" data-filter="duplicate" id="tab-duplicate">Duplicados <span class="tab-badge" id="tab-count-duplicate">0</span></button>
+            </div>
+
+            <div class="search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-input" class="search-input" placeholder="Buscar correo electrónico...">
+            </div>
+
+            <div class="table-card">
+                <table class="results-table" id="results-table">
+                    <thead><tr><th>#</th><th>Correo Electrónico</th><th>Estado</th><th>Motivo</th></tr></thead>
+                    <tbody id="results-body"></tbody>
+                </table>
+                <div class="no-results hidden" id="no-results">
+                    <span>🔎</span><p>No se encontraron resultados</p>
+                </div>
+            </div>
+
+            <div class="export-row">
+                <button class="btn-export" id="btn-export-all"><span>📥</span> Exportar Todos</button>
+                <button class="btn-export" id="btn-export-valid"><span>✅</span> Exportar Válidos</button>
+                <button class="btn-export" id="btn-export-invalid"><span>❌</span> Exportar Inválidos</button>
+                <button class="btn-new" id="btn-new-validation"><span>🔄</span> Nueva Validación</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-mosaic" aria-hidden="true"></div>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/ateneo_logo.png" alt="" class="footer-logo">
+                <div>
+                    <p class="footer-name">Ateneo Siglo XXI</p>
+                    <p class="footer-sub">Asociación Cultural Jerezana</p>
+                </div>
+            </div>
+            <p class="footer-copy">© 2026 Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
