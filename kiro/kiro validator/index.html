@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ateneo Siglo XXI — Validador de Socios</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Decoración superior -->
+  <div class="azulejo-band top-band"></div>
+
+  <header class="main-header">
+    <div class="header-inner">
+      <img src="assets/ateneo_logo.png" alt="Logo Ateneo Siglo XXI" class="logo" />
+      <div class="header-text">
+        <h1>Ateneo Siglo XXI</h1>
+        <p class="subtitle">Asociación Cultural · Validador de Socios</p>
+      </div>
+    </div>
+    <!-- Ornamento floral SVG -->
+    <div class="ornament">
+      <svg viewBox="0 0 200 30" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,15 Q25,0 50,15 Q75,30 100,15 Q125,0 150,15 Q175,30 200,15" stroke="#c8a84b" stroke-width="2" fill="none"/>
+        <circle cx="50" cy="15" r="4" fill="#c8a84b"/>
+        <circle cx="100" cy="15" r="4" fill="#c8a84b"/>
+        <circle cx="150" cy="15" r="4" fill="#c8a84b"/>
+      </svg>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Sección de carga CSV -->
+    <section class="card upload-card">
+      <div class="card-header">
+        <span class="card-icon">📋</span>
+        <h2>Cargar Listado de Socios</h2>
+      </div>
+      <p class="card-desc">
+        Sube el archivo <strong>.csv</strong> con el listado de socios. El archivo debe contener una columna con los emails
+        (encabezado: <code>email</code>, <code>correo</code> o <code>e-mail</code>).
+      </p>
+
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="csvInput" accept=".csv" hidden />
+        <div class="upload-icon">🌸</div>
+        <p>Arrastra tu archivo CSV aquí<br/><span>o haz clic para seleccionarlo</span></p>
+        <button class="btn btn-primary" onclick="document.getElementById('csvInput').click()">
+          Seleccionar archivo
+        </button>
+      </div>
+
+      <div id="fileInfo" class="file-info hidden"></div>
+    </section>
+
+    <!-- Sección de búsqueda individual -->
+    <section class="card search-card">
+      <div class="card-header">
+        <span class="card-icon">🔍</span>
+        <h2>Verificar Email</h2>
+      </div>
+      <p class="card-desc">Introduce un email para comprobar si pertenece a un socio registrado.</p>
+
+      <div class="search-row">
+        <input
+          type="email"
+          id="emailInput"
+          class="input-email"
+          placeholder="ejemplo@correo.com"
+          autocomplete="off"
+        />
+        <button class="btn btn-primary" id="searchBtn" onclick="validateEmail()">
+          Validar
+        </button>
+      </div>
+
+      <div id="searchResult" class="result-box hidden"></div>
+    </section>
+
+    <!-- Estadísticas y tabla -->
+    <section class="card stats-card hidden" id="statsSection">
+      <div class="card-header">
+        <span class="card-icon">📊</span>
+        <h2>Resumen del Listado</h2>
+      </div>
+
+      <div class="stats-grid" id="statsGrid"></div>
+
+      <!-- Filtro de tabla -->
+      <div class="table-controls">
+        <input type="text" id="tableFilter" class="input-filter" placeholder="Filtrar por email..." oninput="filterTable()" />
+        <div class="filter-btns">
+          <button class="btn btn-sm btn-valid" onclick="filterByStatus('valid')">✔ Válidos</button>
+          <button class="btn btn-sm btn-invalid" onclick="filterByStatus('invalid')">✘ Inválidos</button>
+          <button class="btn btn-sm btn-all" onclick="filterByStatus('all')">Todos</button>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="emailTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Email</th>
+              <th>Estado</th>
+              <th>Motivo</th>
+            </tr>
+          </thead>
+          <tbody id="emailTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="export-row">
+        <button class="btn btn-export" onclick="exportResults()">⬇ Exportar resultados CSV</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Decoración inferior -->
+  <div class="azulejo-band bottom-band"></div>
+
+  <footer class="main-footer">
+    <p>Ateneo Siglo XXI · Asociación Cultural Andaluza</p>
+    <p class="footer-sub">Herramienta interna de gestión de socios</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
