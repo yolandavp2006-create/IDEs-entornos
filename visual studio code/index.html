@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Socios | Ateneo Siglo XXI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay-pattern"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo-box">
+                <span class="ornament left">❦</span>
+                <h1>Ateneo Siglo XXI</h1>
+                <span class="ornament right">❦</span>
+            </div>
+            <p class="subtitle">Validación del Registro de Socios</p>
+        </header>
+        
+        <main class="glass-card">
+            <section class="upload-section">
+                <h2>Carga de Archivo CSV</h2>
+                <p>Sube el archivo de socios para verificar las direcciones de correo electrónico.</p>
+                
+                <div class="file-input-wrapper">
+                    <label for="csvFileInput" class="btn-file">
+                        <span class="icon">🗂️</span> Seleccionar Listado CSV
+                    </label>
+                    <input type="file" id="csvFileInput" accept=".csv" />
+                </div>
+                <div id="fileName" class="file-name">Sin archivo seleccionado</div>
+                
+                <button id="validateBtn" class="btn-primary" disabled>Iniciar Validación</button>
+            </section>
+
+            <section id="results" class="results-section hidden">
+                <div class="stats-grid">
+                    <div class="stat-card valid">
+                        <h3>Válidos</h3>
+                        <span id="validCount" class="count">0</span>
+                    </div>
+                    <div class="stat-card invalid">
+                        <h3>Inválidos</h3>
+                        <span id="invalidCount" class="count">0</span>
+                    </div>
+                    <div class="stat-card total">
+                        <h3>Total Analizados</h3>
+                        <span id="totalCount" class="count">0</span>
+                    </div>
+                </div>
+
+                <div class="error-log">
+                    <h3>Registro de Correos Incorrectos</h3>
+                    <ul id="invalidList"></ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
